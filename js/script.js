@@ -1,0 +1,74 @@
+const formulario =
+    document.getElementById("formulario");
+
+formulario.addEventListener("submit",
+function(e){
+
+    e.preventDefault();
+
+    document.getElementById("errorNombre")
+            .innerText = "";
+
+    document.getElementById("errorCorreo")
+            .innerText = "";
+
+    document.getElementById("errorPassword")
+            .innerText = "";
+
+    document.getElementById("mensaje")
+            .innerText = "";
+
+    let nombre =
+        document.getElementById("nombre").value;
+
+    let correo =
+        document.getElementById("correo").value;
+
+    let password =
+        document.getElementById("password").value;
+
+    let valido = true;
+
+    if(nombre.length < 3){
+
+        document.getElementById("errorNombre")
+                .innerText =
+                "El nombre debe tener al menos 3 caracteres.";
+
+        valido = false;
+    }
+
+    let expresion =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if(!expresion.test(correo)){
+
+        document.getElementById("errorCorreo")
+                .innerText =
+                "Ingrese un correo válido.";
+
+        valido = false;
+    }
+
+    if(password.length < 6){
+
+        document.getElementById("errorPassword")
+                .innerText =
+                "La contraseña debe tener al menos 6 caracteres.";
+
+        valido = false;
+    }
+
+    if(valido){
+
+        document.getElementById("mensaje")
+                .style.color = "green";
+
+        document.getElementById("mensaje")
+                .innerText =
+                "✅ Registro realizado correctamente.";
+
+        formulario.reset();
+    }
+
+});
